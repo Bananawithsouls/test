@@ -42,14 +42,13 @@ def import_reg_file(reg_file_path):
             winreg.SetValueEx(key, f"AppVolume_{GAME_NAME}", 0, winreg.REG_SZ, content)
 
         winreg.CloseKey(key)
-        os.remove(reg_file_path)  # Удаление файла после импорта
+        os.remove(reg_file_path)  
         print("Файл реестра успешно импортирован.")
     except Exception as e:
         print(f"Ошибка при импорте файла реестра: {e}")
 
 
 def launch_game(game_folder):
-    # Запуск Steam или игры
     steam_exe_path = os.path.join(os.path.dirname(game_folder), STEAM_EXE)
     game_exe_path = os.path.join(game_folder, GAME_EXE)
 
