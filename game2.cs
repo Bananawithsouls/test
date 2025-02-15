@@ -11,11 +11,11 @@ class Program
             Console.Clear();
             DisplayProcesses();
 
-            Console.WriteLine("\nВыберите действие:");
-            Console.WriteLine("1. Вывести все ID процессов по имени");
-            Console.WriteLine("2. Убить процесс по ID");
-            Console.WriteLine("3. Убить процесс по имени");
-            Console.WriteLine("0. Выход");
+            Console.WriteLine("\nР’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ:");
+            Console.WriteLine("1. Р’С‹РІРµСЃС‚Рё РІСЃРµ ID РїСЂРѕС†РµСЃСЃРѕРІ РїРѕ РёРјРµРЅРё");
+            Console.WriteLine("2. РЈР±РёС‚СЊ РїСЂРѕС†РµСЃСЃ РїРѕ ID");
+            Console.WriteLine("3. РЈР±РёС‚СЊ РїСЂРѕС†РµСЃСЃ РїРѕ РёРјРµРЅРё");
+            Console.WriteLine("0. Р’С‹С…РѕРґ");
 
             string choice = Console.ReadLine();
 
@@ -33,11 +33,11 @@ class Program
                 case "0":
                     return;
                 default:
-                    Console.WriteLine("Неверный выбор. Попробуйте снова.");
+                    Console.WriteLine("РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ. РџРѕРїСЂРѕР±СѓР№С‚Рµ СЃРЅРѕРІР°.");
                     break;
             }
 
-            Console.WriteLine("\nНажмите любую клавишу для продолжения...");
+            Console.WriteLine("\nРќР°Р¶РјРёС‚Рµ Р»СЋР±СѓСЋ РєР»Р°РІРёС€Сѓ РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ...");
             Console.ReadKey();
         }
     }
@@ -47,7 +47,7 @@ class Program
         var currentProcess = Process.GetCurrentProcess();
         var processes = Process.GetProcesses();
 
-        Console.WriteLine("Список запущенных процессов:");
+        Console.WriteLine("РЎРїРёСЃРѕРє Р·Р°РїСѓС‰РµРЅРЅС‹С… РїСЂРѕС†РµСЃСЃРѕРІ:");
         foreach (var process in processes)
         {
             if (process.Id == currentProcess.Id)
@@ -59,7 +59,7 @@ class Program
 
     static void GetProcessIdsByName()
     {
-        Console.Write("Введите имя процесса (или его часть): ");
+        Console.Write("Р’РІРµРґРёС‚Рµ РёРјСЏ РїСЂРѕС†РµСЃСЃР° (РёР»Рё РµРіРѕ С‡Р°СЃС‚СЊ):: ");
         string name = Console.ReadLine();
 
         try
@@ -67,11 +67,11 @@ class Program
             var processes = Process.GetProcessesByName(name);
             if (processes.Length == 0)
             {
-                Console.WriteLine("Процессы с таким именем не найдены.");
+                Console.WriteLine("РџСЂРѕС†РµСЃСЃС‹ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј РЅРµ РЅР°Р№РґРµРЅС‹.");
                 return;
             }
 
-            Console.WriteLine("ID процессов:");
+            Console.WriteLine("ID РїСЂРѕС†РµСЃСЃРѕРІ:");
             foreach (var process in processes)
             {
                 Console.WriteLine($"ID: {process.Id} - {process.ProcessName}");
@@ -79,13 +79,13 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка: {ex.Message}");
+            Console.WriteLine($"РћС€РёР±РєР°: {ex.Message}");
         }
     }
 
     static void KillProcessById()
     {
-        Console.Write("Введите ID процесса для завершения: ");
+        Console.Write("Р’РІРµРґРёС‚Рµ ID РїСЂРѕС†РµСЃСЃР° РґР»СЏ Р·Р°РІРµСЂС€РµРЅРёСЏ: ");
         if (int.TryParse(Console.ReadLine(), out int id))
         {
             try
@@ -93,26 +93,26 @@ class Program
                 var process = Process.GetProcessById(id);
                 process.Kill();
                 process.WaitForExit(); 
-                Console.WriteLine($"Процесс с ID {id} был завершен.");
+                Console.WriteLine($"РџСЂРѕС†РµСЃСЃ СЃ ID {id} Р±С‹Р» Р·Р°РІРµСЂС€РµРЅ.");
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("Процесс с таким ID не найден.");
+                Console.WriteLine("РџСЂРѕС†РµСЃСЃ СЃ С‚Р°РєРёРј ID РЅРµ РЅР°Р№РґРµРЅ.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine($"РћС€РёР±РєР°: {ex.Message}");
             }
         }
         else
         {
-            Console.WriteLine("Неверный формат ID.");
+            Console.WriteLine("РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ ID.");
         }
     }
 
     static void KillProcessByName()
     {
-        Console.Write("Введите имя процесса для завершения: ");
+        Console.Write("Р’РІРµРґРёС‚Рµ РёРјСЏ РїСЂРѕС†РµСЃСЃР° РґР»СЏ Р·Р°РІРµСЂС€РµРЅРёСЏ: ");
         string name = Console.ReadLine();
 
         try
@@ -120,7 +120,7 @@ class Program
             var processes = Process.GetProcessesByName(name);
             if (processes.Length == 0)
             {
-                Console.WriteLine("Процессы с таким именем не найдены.");
+                Console.WriteLine("РџСЂРѕС†РµСЃСЃС‹ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј РЅРµ РЅР°Р№РґРµРЅС‹.");
                 return;
             }
 
@@ -128,12 +128,12 @@ class Program
             {
                 process.Kill();
                 process.WaitForExit(); 
-                Console.WriteLine($"Процесс {process.ProcessName} (ID: {process.Id}) был завершен.");
+                Console.WriteLine($"РџСЂРѕС†РµСЃСЃ {process.ProcessName} (ID: {process.Id}) Р±С‹Р» Р·Р°РІРµСЂС€РµРЅ.");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ошибка: {ex.Message}");
+            Console.WriteLine($"РћС€РёР±РєР°: {ex.Message}");
         }
     }
 }
